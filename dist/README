@@ -1,0 +1,8 @@
+This is packaged distribution of the project.
+
+The project requires the twitter authentication keys to be set in application.properties before running.
+The application.properties file must also exist in the directory from where the project is executed.
+
+The project can be executed on the command line from the dist folder using the command:
+	java -cp lib/java-api-mashup-1.0-RELEASE-jar-with-dependencies.jar sample.ApiMashupApp
+
