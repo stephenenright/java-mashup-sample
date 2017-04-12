@@ -19,17 +19,13 @@ public class MashupApiServiceImpl implements MashupApiService {
 
 	private GitHubApiService githubApiService;
 	private Twitter4jApiService twitter4jApiService;
-	private MashupPrintService printService;
 
-	public MashupApiServiceImpl(GitHubApiService githubApiService, Twitter4jApiService twitter4jApiService,
-			MashupPrintService printService) {
+	public MashupApiServiceImpl(GitHubApiService githubApiService, Twitter4jApiService twitter4jApiService) {
 		this.githubApiService = githubApiService;
 		this.twitter4jApiService = twitter4jApiService;
-		this.printService = printService;
-
 	}
 
-	public void searchForReactiveProjects() {
+	public List<MashupResult> searchForReactiveProjects() {
 
 		PagedResult<GitHubRepository> pagedResult = githubApiService.search("reactive", new PagingContext(1, 10));
 
@@ -57,11 +53,10 @@ public class MashupApiServiceImpl implements MashupApiService {
 				results.add(result.get());
 			}
 
-			for (MashupResult result : results) {
-				printService.print(result);
-			}
+			return results;
+			
 		} catch (InterruptedException ie) {
-			return;
+			throw new ApiException("Unable to perform mashup request task was Interrupted ", ie);
 		} catch (ExecutionException ee) {
 			throw new ApiException("Unable to perform mashup request", ee);
 		} finally {

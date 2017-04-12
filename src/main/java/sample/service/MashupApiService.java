@@ -1,12 +1,9 @@
 package sample.service;
 
-public interface MashupApiService {
+import java.util.List;
 
-	
-	public void searchForReactiveProjects();
-	
-	
-	
-	
-	
+import sample.model.MashupResult;
+
+public interface MashupApiService {
+	public List<MashupResult> searchForReactiveProjects();
 }
